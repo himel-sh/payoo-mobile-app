@@ -29,7 +29,9 @@
         <div class="flex items-center space-x-2">
           <img src="./assets/Group.png" alt="" />
           <div>
-            <h2 class="text-xl font-bold">$<span>45000</span></h2>
+            <h2 class="text-xl font-bold">
+              $<span id="available-balance">45000</span>
+            </h2>
             <p class="opacity-50">Available Balance</p>
           </div>
         </div>
@@ -97,6 +99,7 @@
           <div>
             <h1 class="font-semibold">Select a Bank</h1>
             <select
+              id="bank"
               class="select select-ghost opacity-85 rounded-3xl border-b-1 border-gray-400 bg-[#f4f5f7] w-full"
             >
               <option disabled selected>Select Bank</option>
@@ -111,32 +114,39 @@
             <label class="font-semibold" for="">Bank Account Number</label
             ><br />
             <input
+              id="bank-account-number"
               type="text"
               placeholder="Enter 11 digit account number"
-              id="bank-account-number"
               class="input bg-[#f4f5f7] rounded-3xl w-full mt-2"
             />
           </div>
           <div class="my-[8px]">
             <label class="font-semibold" for="">Amount to Add</label><br />
             <input
+              id="add-amount"
               type="text"
               placeholder="Add amount to withdraw"
-              id="mobile-number"
               class="input bg-[#f4f5f7] rounded-3xl w-full mt-2"
             />
           </div>
           <div class="my-[8px]">
             <label class="font-semibold" for="">Pin Number</label><br />
             <input
+              id="pin-number"
               type="text"
               placeholder="Enter 4 Digit pin number"
-              id="pin-number"
               class="input bg-[#f4f5f7] rounded-3xl w-full mt-2"
             />
           </div>
+          <button
+            id="add-money-btn"
+            class="btn btn-primary bg-[#0874f2] my-[16px] w-full rounded-3xl"
+          >
+            Add Money
+          </button>
         </form>
       </div>
     </div>
+    <script src="./home.js"></script>
   </body>
 </html>
