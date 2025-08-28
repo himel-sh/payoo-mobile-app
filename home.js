@@ -2,6 +2,7 @@ const validWithdrawPin = 1234;
 const validCashoutPin = 1234;
 const validBankAccountNumber = "12345678901";
 const validAgentNumber = "12345678901";
+const transactionData = [];
 // function to get input values
 function getInputValueNumber(id) {
   const inputField = document.getElementById(id);
@@ -23,6 +24,17 @@ function handleToggle(id) {
     form.style.display = "none";
   }
   document.getElementById(id).style.display = "block";
+}
+function handleToggleButton(id) {
+  const formBtns = document.getElementsByClassName("form-btn");
+  for (const btn of formBtns) {
+    btn.classList.remove("border-[#0874F2]", "bg-[#0874F20D]");
+    btn.classList.add("border-[#0808081a]");
+  }
+  document
+    .getElementById(id)
+    .classList.add("border-[#0874F2]", "bg-[#0874F20D]");
+  document.getElementById(id).classList.remove("border-[#0808081a]");
 }
 
 // add money feature
@@ -55,6 +67,13 @@ document
     }
     const newBalance = availableBalance + amountToAdd;
     document.getElementById("available-balance").innerText = newBalance;
+
+    const data = {
+      name: "Add Money",
+      date: new Date().toLocaleTimeString(),
+    };
+    transactionData.push(data);
+    console.log(transactionData);
   });
 
 // withdrawing feature
@@ -78,30 +97,82 @@ document.getElementById("withdraw-btn").addEventListener("click", function (e) {
   }
   const newBalance = availableBalance - cashOutAmount;
   document.getElementById("available-balance").innerText = newBalance;
+
   if (newBalance < 0) {
     alert("Insufficient balance");
     document.getElementById("available-balance").innerText = availableBalance;
     return;
   }
+  const data = {
+    name: "Cash Out",
+    date: new Date().toLocaleTimeString(),
+  };
+  transactionData.push(data);
+  console.log(transactionData);
 });
 
+document
+  .getElementById("transactions-history-button")
+  .addEventListener("click", function () {
+    const transactionContainer = document.getElementById(
+      "transactions-container"
+    );
+    for (const data of transactionData) {
+      const div = document.createElement("div");
+      div.innerHTML =
+        '<div class="bg-white my-3 rounded-xl p-3 flex justify-between items-center h-auto max-w-lg mx-auto">\
+          <div>\
+            <div class="flex items-center">\
+              <div class="p-3 rounded-full bg-[#f4f5f7]"><img src="./assets/wallet1.png" class="mx-auto" alt="" /></div>\
+              <div class="ml-2">\
+                    <h1>' +
+        data.name +
+        "</h1>\
+                <p>" +
+        data.date +
+        '</p>\
+              </div>\
+            </div>\
+          </div>\
+          <div><i class="fa-solid fa-ellipsis-vertical"></i></div>\
+        </div>';
+      transactionContainer.appendChild(div);
+    }
+  });
 // toggling feature
 
 document.getElementById("add-button").addEventListener("click", function () {
   handleToggle("add-money-parent");
+
+  handleToggleButton("add-button");
 });
 document
   .getElementById("cash-out-button")
   .addEventListener("click", function () {
     handleToggle("cash-out-parent");
+    handleToggleButton("cash-out-button");
   });
 document
   .getElementById("transfer-money-button")
   .addEventListener("click", function () {
     handleToggle("transfer-money-parent");
+    handleToggleButton("transfer-money-button");
   });
 document
   .getElementById("get-bonus-button")
   .addEventListener("click", function () {
     handleToggle("get-bonus-parent");
+    handleToggleButton("get-bonus-button");
+  });
+document
+  .getElementById("pay-bill-button")
+  .addEventListener("click", function () {
+    handleToggle("pay-bill-parent");
+    handleToggleButton("pay-bill-button");
+  });
+document
+  .getElementById("transactions-history-button")
+  .addEventListener("click", function () {
+    handleToggle("transactions-history-parent");
+    handleToggleButton("transactions-history-button");
   });
